@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparativo de Plataformas de Hospedagem</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #dbeafe;
+            --secondary: #059669;
+            --accent: #7c3aed;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+            --border: #cbd5e1;
+            --white: #ffffff;
+            --render: #5e5adb;
+            --vercel: #000000;
+            --netlify: #00ad9f;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            padding: 3rem 1rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin: 2.5rem 0 1.5rem;
+            color: var(--dark);
+            font-weight: 600;
+            position: relative;
+        }
+        
+        h2:after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            margin: 1.5rem 0 0.8rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            color: var(--gray);
+        }
+        
+        .intro {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            margin: 2.5rem 0;
+            flex-wrap: wrap;
+            gap: 10px;
+            background: var(--white);
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .tab-btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--gray);
+        }
+        
+        .tab-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .tab-btn.active {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .platforms {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .platform-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+        }
+        
+        .platform-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .platform-header {
+            padding: 1.8rem;
+            color: var(--white);
+            text-align: center;
+        }
+        
+        .render {
+            background: var(--render);
+        }
+        
+        .vercel {
+            background: var(--vercel);
+        }
+        
+        .netlify {
+            background: var(--netlify);
+        }
+        
+        .platform-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+        
+        .platform-body {
+            padding: 1.8rem;
+        }
+        
+        .feature-list {
+            list-style-type: none;
+            margin: 1.5rem 0;
+        }
+        
+        .feature-list li {
+            padding: 0.7rem 0;
+            border-bottom: 1px solid var(--gray-light);
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-list li:before {
+            content: "✓";
+            color: var(--secondary);
+            font-weight: bold;
+            margin-right: 0.7rem;
+        }
+        
+        .comparison {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 3rem 0;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-light);
+        }
+        
+        th {
+            background: var(--primary-light);
+            color: var(--dark);
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background: var(--primary-light);
+        }
+        
+        .rating {
+            display: flex;
+            margin: 0.5rem 0;
+        }
+        
+        .star {
+            color: #f59e0b;
+            margin-right: 3px;
+        }
+        
+        .tutorial-steps {
+            margin: 2.5rem 0;
+        }
+        
+        .step {
+            display: flex;
+            margin-bottom: 2rem;
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+        }
+        
+        .step-number {
+            background: var(--primary);
+            color: var(--white);
+            font-size: 1.3rem;
+            font-weight: 600;
+            padding: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 60px;
+        }
+        
+        .step-content {
+            padding: 1.5rem;
+        }
+        
+        .conclusion {
+            background: var(--white);
+            color: var(--dark);
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin: 3rem 0;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+        }
+        
+        .conclusion h2 {
+            color: var(--dark);
+            margin-bottom: 2rem;
+        }
+        
+        .conclusion-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            text-align: center;
+            padding: 2.5rem 1rem;
+            margin-top: 4rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: var(--primary-dark);
+        }
+        
+        .platform-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .platform-tutorial {
+            margin-top: 3rem;
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: var(--gray-light);
+            margin: 2.5rem 0;
+        }
+        
+        .highlight {
+            background: var(--primary-light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+            margin: 1.5rem 0;
+        }
+        
+        .icon {
+            margin-right: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .platforms {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.6rem;
+            }
+            
+            .step {
+                flex-direction: column;
+            }
+            
+            .step-number {
+                min-width: 100%;
+                padding: 1rem;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Comparativo de Plataformas de Hospedagem</h1>
+            <p class="intro">
+                Análise detalhada das principais plataformas para hospedagem de sites estáticos: 
+                Render, Vercel e Netlify. Compare recursos, facilidade de uso e tome a melhor decisão para seu projeto.
+            </p>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="nav-tabs">
+            <button class="tab-btn active" data-tab="overview">
+                <i class="fas fa-layer-group icon"></i>Visão Geral
+            </button>
+            <button class="tab-btn" data-tab="tutorials">
+                <i class="fas fa-graduation-cap icon"></i>Tutoriais
+            </button>
+            <button class="tab-btn" data-tab="comparison">
+                <i class="fas fa-chart-bar icon"></i>Comparação
+            </button>
+            <button class="tab-btn" data-tab="conclusion">
+                <i class="fas fa-flag-checkered icon"></i>Conclusão
+            </button>
+        </div>
+        
+        <!-- Visão Geral -->
+        <section id="overview" class="tab-content active">
+            <h2>Plataformas em Comparação</h2>
+            <p>Selecione uma plataforma para ver detalhes sobre seus recursos e funcionalidades.</p>
+            
+            <div class="platforms">
+                <!-- Render -->
+                <div class="platform-card">
+                    <div class="platform-header render">
+                        <div class="platform-logo">Render</div>
+                        <h3>Cloud Application Platform</h3>
+                    </div>
+                    <div class="platform-body">
+                        <p>Plataforma unificada para hospedagem de aplicações web, APIs, bancos de dados e sites estáticos.</p>
+                        <ul class="feature-list">
+                            <li>Deploy contínuo a partir do GitHub/GitLab</li>
+                            <li>SSL gratuito automático</li>
+                            <li>CDN global</li>
+                            <li>Pull Request Previews</li>
+                            <li>Suporte a funções serverless</li>
+                        </ul>
+                        <a href="https://render.com" class="btn platform-btn" target="_blank">
+                            <i class="fas fa-external-link-alt icon"></i>Visitar Render
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Vercel -->
+                <div class="platform-card">
+                    <div class="platform-header vercel">
+                        <div class="platform-logo">Vercel</div>
+                        <h3>Plataforma Frontend Cloud</h3>
+                    </div>
+                    <div class="platform-body">
+                        <p>Plataforma otimizada para frameworks frontend como Next.js, com foco em performance e experiência do desenvolvedor.</p>
+                        <ul class="feature-list">
+                            <li>Deploy instantâneo com Git</li>
+                            <li>Edge Network global</li>
+                            <li>Preview para cada commit</li>
+                            <li>Funções serverless</li>
+                            <li>Otimizado para Next.js</li>
+                        </ul>
+                        <a href="https://vercel.com" class="btn platform-btn" target="_blank">
+                            <i class="fas fa-external-link-alt icon"></i>Visitar Vercel
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Netlify -->
+                <div class="platform-card">
+                    <div class="platform-header netlify">
+                        <div class="platform-logo">Netlify</div>
+                        <h3>Plataforma All-in-One</h3>
+                    </div>
+                    <div class="platform-body">
+                        <p>Plataforma completa para desenvolvimento web moderno, com foco em Jamstack e workflows automatizados.</p>
+                        <ul class="feature-list">
+                            <li>Deploy contínuo do Git</li>
+                            <li>Funções serverless</li>
+                            <li>Forms e Identity</li>
+                            <li>Split Testing</li>
+                            <li>Ampla gama de integrações</li>
+                        </ul>
+                        <a href="https://netlify.com" class="btn platform-btn" target="_blank">
+                            <i class="fas fa-external-link-alt icon"></i>Visitar Netlify
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tutoriais -->
+        <section id="tutorials" class="tab-content">
+            <h2>Tutoriais de Hospedagem</h2>
+            <p>Guia passo a passo para publicar seu site estático em cada plataforma.</p>
+            
+            <div class="platform-tutorial">
+                <h3><i class="fas fa-cloud-upload-alt icon" style="color: var(--render);"></i>Render</h3>
+                <div class="tutorial-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Crie uma conta no Render</h4>
+                            <p>Acesse <a href="https://render.com" target="_blank">render.com</a> e crie uma conta usando seu GitHub, GitLab ou email.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Conecte seu repositório</h4>
+                            <p>No dashboard, clique em "New" e selecione "Static Site". Conecte sua conta do GitHub/GitLab e selecione o repositório do seu site.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Configure o build</h4>
+                            <p>Defina o branch (geralmente main), comando de build (ex: npm run build) e pasta de publicação (ex: dist, public ou build).</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Deploy automático</h4>
+                            <p>Clique em "Create Static Site". O Render fará o deploy automaticamente e fornecerá uma URL para acessar seu site.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <div class="platform-tutorial">
+                <h3><i class="fas fa-bolt icon" style="color: var(--vercel);"></i>Vercel</h3>
+                <div class="tutorial-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Faça login na Vercel</h4>
+                            <p>Acesse <a href="https://vercel.com" target="_blank">vercel.com</a> e faça login com sua conta do GitHub, GitLab ou Bitbucket.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Importe seu projeto</h4>
+                            <p>Clique em "Add New" → "Project". Selecione o repositório do seu site estático.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Configuração automática</h4>
+                            <p>A Vercel detecta automaticamente o framework e configurações de build. Você pode ajustar se necessário.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Deploy</h4>
+                            <p>Clique em "Deploy". Em segundos, seu site estará online com uma URL .vercel.app. Cada novo commit no repositório gera um novo deploy.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <div class="platform-tutorial">
+                <h3><i class="fas fa-rocket icon" style="color: var(--netlify);"></i>Netlify</h3>
+                <div class="tutorial-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Crie uma conta na Netlify</h4>
+                            <p>Acesse <a href="https://netlify.com" target="_blank">netlify.com</a> e registre-se usando GitHub, GitLab, Bitbucket ou email.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Adicione seu site</h4>
+                            <p>No dashboard, clique em "Add new site" e selecione "Import an existing project". Conecte seu repositório.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Configure as opções de build</h4>
+                            <p>Especifique o comando de build (ex: npm run build) e a pasta de publicação (ex: dist, build ou public).</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Deploy contínuo</h4>
+                            <p>Clique em "Deploy site". A Netlify fará o build e deploy, e seu site estará acessível via URL .netlify.app.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Comparação -->
+        <section id="comparison" class="tab-content">
+            <h2>Comparação Detalhada</h2>
+            <p>Avaliação das plataformas baseada em critérios objetivos de usabilidade, recursos e acessibilidade.</p>
+            
+            <div class="comparison">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>Render</th>
+                            <th>Vercel</th>
+                            <th>Netlify</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Facilidade de publicação</td>
+                            <td>
+                                <div class="rating">
+                                    <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">☆</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="rating">
+                                    <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="rating">
+                                    <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Recursos disponíveis</td>
+                            <td>CDN, SSL, PR Previews, Serverless</td>
+                            <td>Edge Network, Analytics, Serverless, Image Optimization</td>
+                            <td>CDN, Forms, Identity, Split Testing, Serverless</td>
+                        </tr>
+                        <tr>
+                            <td>Usabilidade da plataforma</td>
+                            <td>Interface clara, mas menos intuitiva</td>
+                            <td>Interface moderna e extremamente intuitiva</td>
+                            <td>Interface amigável e bem organizada</td>
+                        </tr>
+                        <tr>
+                            <td>Acessibilidade</td>
+                            <td>Boa documentação, suporte por email</td>
+                            <td>Excelente documentação, comunidade ativa</td>
+                            <td>Documentação completa, suporte comunitário forte</td>
+                        </tr>
+                        <tr>
+                            <td>Plano gratuito</td>
+                            <td>500 horas/mês de serviços estáticos</td>
+                            <td>Hobby (uso pessoal), domínios .vercel.app</td>
+                            <td>100GB/mês de banda, 300 minutos de build</td>
+                        </tr>
+                        <tr>
+                            <td>Integração com Git</td>
+                            <td>GitHub, GitLab, Bitbucket</td>
+                            <td>GitHub, GitLab, Bitbucket</td>
+                            <td>GitHub, GitLab, Bitbucket</td>
+                        </tr>
+                        <tr>
+                            <td>Custom Domains</td>
+                            <td>Sim (gratuito)</td>
+                            <td>Sim (gratuito)</td>
+                            <td>Sim (gratuito)</td>
+                        </tr>
+                        <tr>
+                            <td>HTTPS/SSL</td>
+                            <td>Automático e gratuito</td>
+                            <td>Automático e gratuito</td>
+                            <td>Automático e gratuito</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="highlight">
+                <h3><i class="fas fa-lightbulb icon"></i>Destaques</h3>
+                <p><strong>Render</strong> é ideal para quem busca uma plataforma unificada para diferentes tipos de serviços.</p>
+                <p><strong>Vercel</strong> oferece a melhor experiência para desenvolvedores com foco em performance.</p>
+                <p><strong>Netlify</strong> possui a gama mais completa de recursos nativos para projetos profissionais.</p>
+            </div>
+        </section>
+        
+        <!-- Conclusão -->
+        <section id="conclusion" class="tab-content">
+            <div class="conclusion">
+                <h2>Análise e Recomendações</h2>
+                <div class="conclusion-content">
+                    <h3><i class="fas fa-check-circle icon" style="color: var(--secondary);"></i>Facilidade de Publicação</h3>
+                    <p>Todas as plataformas oferecem integração direta com repositórios Git, permitindo deploys automáticos. Vercel e Netlify se destacam pela simplicidade e velocidade do processo, com configuração quase instantânea. Render tem uma curva de aprendizado um pouco mais íngreme, mas ainda assim é bastante acessível.</p>
+                    
+                    <h3><i class="fas fa-cogs icon" style="color: var(--primary);"></i>Recursos Disponíveis</h3>
+                    <p>Netlify oferece a gama mais ampla de recursos nativos, incluindo formulários, autenticação (Identity) e split testing. Vercel se destaca pela otimização para frameworks modernos como Next.js e sua Edge Network. Render oferece uma abordagem mais generalista, funcionando bem para diversos tipos de aplicação além de sites estáticos.</p>
+                    
+                    <h3><i class="fas fa-user-friends icon" style="color: var(--accent);"></i>Usabilidade</h3>
+                    <p>Vercel possui a interface mais moderna e intuitiva, com foco na experiência do desenvolvedor. Netlify tem uma interface amigável e bem organizada, com excelente documentação. Render tem uma interface funcional, mas menos polida em comparação com as outras duas plataformas.</p>
+                    
+                    <h3><i class="fas fa-life-ring icon" style="color: var(--render);"></i>Acessibilidade</h3>
+                    <p>Todas as plataformas possuem documentação abrangente. Netlify e Vercel se destacam pelo forte engajamento comunitário, tutoriais detalhados e recursos de aprendizado. Render oferece suporte direto por email mesmo em seu plano gratuito, o que é um diferencial.</p>
+                    
+                    <div class="highlight">
+                        <h3><i class="fas fa-medal icon" style="color: #f59e0b;"></i>Recomendação Final</h3>
+                        <p><strong>Para projetos simples e pessoais</strong>, qualquer uma das plataformas atende bem. Escolha baseado na sua familiaridade com a interface.</p>
+                        <p><strong>Para projetos profissionais</strong> com necessidade de recursos avançados como formulários e autenticação, <strong>Netlify</strong> é a melhor opção.</p>
+                        <p><strong>Para aplicações Next.js</strong> ou com foco máximo em performance, <strong>Vercel</strong> é ideal.</p>
+                        <p><strong>Para quem busca uma plataforma unificada</strong> que possa hospedar diferentes tipos de serviços, <strong>Render</strong> é uma ótima opção.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>Atividade de Expedição Interdisciplinar — Criação e Publicação de Site Estático</p>
+            <p>Comparativo entre plataformas de hospedagem estática: Render, Vercel e Netlify</p>
+        </div>
+    </footer>
+
+    <script>
+        // Tab functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active class from all buttons and contents
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    btn.classList.add('active');
+                    
+                    // Show corresponding content
+                    const tabId = btn.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
